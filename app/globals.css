@@ -1,182 +1,227 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "./shadcn.css";
+@plugin "@tailwindcss/typography";
 
-@layer base {
-  :root {
-    --background: 180 20% 98%;
-    --foreground: 180 10% 10%;
+@custom-variant dark (&:is(.dark *));
 
-    --card: 180 20% 98%;
-    --card-foreground: 180 10% 10%;
+@theme inline {
+    --font-heading: var(--font-sans);
+    --font-sans: var(--font-sans);
+    --color-sidebar-ring: var(--sidebar-ring);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar: var(--sidebar);
+    --color-chart-5: var(--chart-5);
+    --color-chart-4: var(--chart-4);
+    --color-chart-3: var(--chart-3);
+    --color-chart-2: var(--chart-2);
+    --color-chart-1: var(--chart-1);
+    --color-ring: var(--ring);
+    --color-input: var(--input);
+    --color-border: var(--border);
+    --color-destructive: var(--destructive);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-accent: var(--accent);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-muted: var(--muted);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-secondary: var(--secondary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-primary: var(--primary);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-popover: var(--popover);
+    --color-card-foreground: var(--card-foreground);
+    --color-card: var(--card);
+    --color-foreground: var(--foreground);
+    --color-background: var(--background);
+    --color-highlight: var(--highlight);
+    --radius-sm: calc(var(--radius) * 0.6);
+    --radius-md: calc(var(--radius) * 0.8);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) * 1.4);
+    --radius-2xl: calc(var(--radius) * 1.8);
+    --radius-3xl: calc(var(--radius) * 2.2);
+    --radius-4xl: calc(var(--radius) * 2.6);
+    --font-serif: var(--font-display);
+    --font-display: var(--font-display);
+}
 
-    --popover: 180 20% 98%;
-    --popover-foreground: 180 10% 10%;
+/* custom palette used by the Luxury resume template */
+@theme {
+    --color-navy-700: #1a1f35;
+    --color-navy-800: #151929;
+    --color-navy-900: #0f121d;
+    --color-navy-950: #0a0c14;
+}
 
-    --primary: 175 70% 41%;
-    --primary-foreground: 0 0% 100%;
+/* Paper & ink. One accent (deep teal), warm neutrals, hairline borders. */
+:root {
+    --background: oklch(0.975 0.007 85);
+    --foreground: oklch(0.2 0.01 70);
+    --card: oklch(0.99 0.004 85);
+    --card-foreground: oklch(0.2 0.01 70);
+    --popover: oklch(0.99 0.004 85);
+    --popover-foreground: oklch(0.2 0.01 70);
+    --primary: oklch(0.42 0.075 185);
+    --primary-foreground: oklch(0.98 0.005 85);
+    --secondary: oklch(0.945 0.01 85);
+    --secondary-foreground: oklch(0.25 0.01 70);
+    --muted: oklch(0.945 0.01 85);
+    --muted-foreground: oklch(0.5 0.012 70);
+    --accent: oklch(0.93 0.025 185);
+    --accent-foreground: oklch(0.32 0.06 185);
+    --destructive: oklch(0.55 0.19 30);
+    --border: oklch(0.885 0.012 80);
+    --input: oklch(0.86 0.012 80);
+    --ring: oklch(0.42 0.075 185);
+    --highlight: oklch(0.9 0.11 95);
+    --chart-1: oklch(0.42 0.075 185);
+    --chart-2: oklch(0.6 0.1 60);
+    --chart-3: oklch(0.55 0.08 250);
+    --chart-4: oklch(0.65 0.06 140);
+    --chart-5: oklch(0.5 0.012 70);
+    --radius: 0.375rem;
+    --sidebar: oklch(0.96 0.008 85);
+    --sidebar-foreground: oklch(0.2 0.01 70);
+    --sidebar-primary: oklch(0.42 0.075 185);
+    --sidebar-primary-foreground: oklch(0.98 0.005 85);
+    --sidebar-accent: oklch(0.93 0.012 85);
+    --sidebar-accent-foreground: oklch(0.2 0.01 70);
+    --sidebar-border: oklch(0.885 0.012 80);
+    --sidebar-ring: oklch(0.42 0.075 185);
+}
 
-    --secondary: 180 16% 93%;
-    --secondary-foreground: 175 70% 30%;
-
-    --muted: 180 16% 93%;
-    --muted-foreground: 180 5% 40%;
-
-    --accent: 175 70% 97%;
-    --accent-foreground: 175 70% 30%;
-
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 180 16% 90%;
-    --input: 180 16% 90%;
-    --ring: 175 70% 41%;
-
-    --radius: 0.5rem;
-  }
-
-  .dark {
-    --background: 180 25% 10%;
-    --foreground: 180 5% 95%;
-
-    --card: 180 25% 12%;
-    --card-foreground: 180 5% 95%;
-
-    --popover: 180 25% 12%;
-    --popover-foreground: 180 5% 95%;
-
-    --primary: 175 70% 41%;
-    --primary-foreground: 0 0% 100%;
-
-    --secondary: 180 25% 16%;
-    --secondary-foreground: 175 70% 80%;
-
-    --muted: 180 25% 16%;
-    --muted-foreground: 180 5% 65%;
-
-    --accent: 175 25% 16%;
-    --accent-foreground: 175 70% 80%;
-
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 180 25% 20%;
-    --input: 180 25% 20%;
-    --ring: 175 70% 41%;
-  }
+.dark {
+    --background: oklch(0.17 0.006 70);
+    --foreground: oklch(0.93 0.01 85);
+    --card: oklch(0.205 0.007 70);
+    --card-foreground: oklch(0.93 0.01 85);
+    --popover: oklch(0.205 0.007 70);
+    --popover-foreground: oklch(0.93 0.01 85);
+    --primary: oklch(0.74 0.09 185);
+    --primary-foreground: oklch(0.18 0.02 185);
+    --secondary: oklch(0.25 0.008 70);
+    --secondary-foreground: oklch(0.93 0.01 85);
+    --muted: oklch(0.25 0.008 70);
+    --muted-foreground: oklch(0.68 0.012 80);
+    --accent: oklch(0.28 0.03 185);
+    --accent-foreground: oklch(0.88 0.04 185);
+    --destructive: oklch(0.68 0.17 30);
+    --border: oklch(0.3 0.008 70);
+    --input: oklch(0.34 0.008 70);
+    --ring: oklch(0.74 0.09 185);
+    --highlight: oklch(0.45 0.08 95);
+    --chart-1: oklch(0.74 0.09 185);
+    --chart-2: oklch(0.72 0.1 60);
+    --chart-3: oklch(0.7 0.08 250);
+    --chart-4: oklch(0.72 0.06 140);
+    --chart-5: oklch(0.68 0.012 80);
+    --sidebar: oklch(0.19 0.006 70);
+    --sidebar-foreground: oklch(0.93 0.01 85);
+    --sidebar-primary: oklch(0.74 0.09 185);
+    --sidebar-primary-foreground: oklch(0.18 0.02 185);
+    --sidebar-accent: oklch(0.25 0.008 70);
+    --sidebar-accent-foreground: oklch(0.93 0.01 85);
+    --sidebar-border: oklch(0.3 0.008 70);
+    --sidebar-ring: oklch(0.74 0.09 185);
 }
 
 @layer base {
   * {
-    @apply border-border;
-  }
+    @apply border-border outline-ring/50;
+    }
   body {
     @apply bg-background text-foreground;
+    }
+  html {
+    @apply font-sans;
+    }
+}
+/* ---- Resume sheet & printing --------------------------------------------- */
+@page {
+  size: A4;
+  margin: 12mm;
+}
+
+@media print {
+  html,
+  body {
+    background: white !important;
+    color: black;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-area {
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: none !important;
+    box-shadow: none !important;
+    border: 0 !important;
+  }
+  /* undo on-screen fit-to-width scaling */
+  .scaled-preview {
+    height: auto !important;
+    overflow: visible !important;
+    border: 0 !important;
+    visibility: visible !important;
+  }
+  .scaled-preview > div {
+    position: static !important;
+    transform: none !important;
+    width: auto !important;
+  }
+  .resume-sheet {
+    padding: 0 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .resume-sheet section,
+  .resume-sheet li,
+  .resume-sheet h2,
+  .resume-sheet h3 {
+    break-inside: avoid;
+  }
+  .resume-sheet h2 {
+    break-after: avoid;
   }
 }
 
-.chat-bubble-user {
-  @apply bg-primary text-primary-foreground rounded-2xl rounded-tr-none;
-}
-
-.chat-bubble-ai {
-  @apply bg-secondary text-secondary-foreground rounded-2xl rounded-tl-none;
-}
-
-.gradient-bg {
-  @apply bg-gradient-to-r from-teal-500 to-emerald-500;
-}
-
-/* Markdown styling */
-.prose {
-  @apply text-foreground;
-}
-
-.prose code {
-  @apply bg-muted px-1 py-0.5 rounded text-sm;
-}
-
+/* ---- Chat markdown ------------------------------------------------------- */
 .prose pre {
-  @apply bg-muted p-4 rounded-md my-4 overflow-x-auto;
+  overflow-x: auto;
 }
 
-.prose h1,
-.prose h2,
-.prose h3,
-.prose h4 {
-  @apply text-primary font-bold;
+/* ---- Editorial primitives --------------------------------------------- */
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
 }
 
-.prose h1 {
-  @apply text-2xl;
+@utility display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  line-height: 1.02;
 }
 
-.prose h2 {
-  @apply text-xl;
+/* yellow highlighter swipe for a word or two */
+@utility mark-highlight {
+  background-image: linear-gradient(transparent 58%, var(--highlight) 58%, var(--highlight) 92%, transparent 92%);
+  padding-inline: 0.08em;
 }
 
-.prose h3 {
-  @apply text-lg;
-}
-
-.prose p {
-  @apply my-2;
-}
-
-.prose ul,
-.prose ol {
-  @apply pl-6 my-2;
-}
-
-.prose ul {
-  @apply list-disc;
-}
-
-.prose ol {
-  @apply list-decimal;
-}
-
-.prose blockquote {
-  @apply border-l-4 border-primary/30 pl-4 italic;
-}
-
-/* Typing indicator */
-.typing-indicator {
-  @apply flex space-x-2 items-center;
-}
-
-.typing-indicator-dot {
-  @apply h-2 w-2 rounded-full bg-primary;
-}
-
-/* Sidebar resize handle */
-.resize-handle {
-  @apply absolute top-0 right-0 h-full w-1 cursor-ew-resize hover:bg-primary/50 z-10;
-}
-
-.resize-handle-icon {
-  @apply absolute top-1/2 right-0 -translate-y-1/2 p-0.5 bg-primary/20 rounded-sm;
-}
-
-/* Prevent text selection during resize */
-.resizing * {
-  @apply select-none;
-}
-
-.modal-scrollable {
-  scrollbar-width: thin;
-  scrollbar-color: var(--primary) transparent;
-}
-
-.modal-scrollable::-webkit-scrollbar {
-  width: 6px;
-}
-
-.modal-scrollable::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.modal-scrollable::-webkit-scrollbar-thumb {
-  background-color: var(--primary);
-  border-radius: 3px;
+@layer base {
+  ::selection {
+    background: color-mix(in oklch, var(--highlight) 70%, transparent);
+  }
 }

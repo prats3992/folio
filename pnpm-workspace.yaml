@@ -1,0 +1,7 @@
+allowBuilds:
+  esbuild: true
+  unrs-resolver: true
+
+# security patches for transitive dependencies (pnpm audit)
+overrides:
+  "@esbuild-kit/core-utils>esbuild": ">=0.25.0"
